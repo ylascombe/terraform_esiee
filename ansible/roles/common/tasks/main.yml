@@ -1,0 +1,23 @@
+---
+- name: Get libselinux-python, vim and wget.
+  yum:
+    name:
+    - libselinux-python
+    - vim
+    - wget
+    state: present
+
+- name: Disabling security enforced linux.
+  selinux:
+    state: disabled
+
+- name: Install epel-release.
+  yum:
+    state: present
+    name: epel-release
+
+- name: Copy project on vm.
+  become: false
+  synchronize:
+    src: "{{ playbook_dir }}/../"
+    dest: /home/vagrant/skoolops-terraform

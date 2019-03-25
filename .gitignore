@@ -1,0 +1,8 @@
+.idea
+.terraform
+.vagrant
+*.tfstate
+*.tfstate.backup
+id_rsa
+id_rsa.pub
+terraform/generated-provider.tf

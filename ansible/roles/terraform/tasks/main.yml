@@ -1,0 +1,21 @@
+---
+- name: Install dependencies.
+  yum:
+    name:
+    - git
+    - unzip
+
+- name: Install terraform.
+  unarchive:
+    remote_src: true
+    src: https://releases.hashicorp.com/terraform/{{ terraform_version }}/terraform_{{ terraform_version }}_linux_amd64.zip
+    dest: /usr/bin/
+    mode: 0751
+
+- name: Test installation.
+  command: terraform --version
+  register: terraform_command_version
+  failed_when: terraform_version not in terraform_command_version.stdout
+  changed_when: false
+
+...

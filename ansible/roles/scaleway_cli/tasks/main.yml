@@ -1,0 +1,15 @@
+---
+
+- name: Download scaleway CLI
+  get_url:
+    url: https://github.com/scaleway/scaleway-cli/releases/download/{{ scaleway_cli_version }}/scw-linux-i386
+    dest: /usr/local/bin/scw
+    mode: 0755
+    owner: root
+    group: root
+
+- name: Test scaleway CLI is present
+  command: /usr/local/bin/scw version
+  register: scw_version
+  changed_when: false
+  failed_when: "'Client version: ' + scaleway_cli_version not in scw_version.stdout"
