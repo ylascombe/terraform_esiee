@@ -14,6 +14,9 @@ echo "Please enter your trigram: "
 read -s read_TRIGRAM
 export TF_VAR_trigram="${read_TRIGRAM}"
 
+# Permet d'affecter la valeur du fichier de votre cl? publique dans la variable Terraform public_ssh_key
+export TF_VAR_public_ssh_key="$(cat ~/.ssh/id_rsa.pub)"
+
 # Hack since terraform does not read env var currently :-(
 cat <<EOF > generated-provider.tf
 provider "scaleway" {
@@ -22,3 +25,4 @@ provider "scaleway" {
   region       = "par1"
 }
 EOF
+
